@@ -25,9 +25,9 @@ namespace Tyuiu.NazarovSV.Sprint5.Task2.V9.Lib
                 }
             }
             string str = "";
-            for (int i = 0; i < cols; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < rows; j++)
+                for (int j = 0; j < cols; j++)
                 {
                     if (j != cols)
                     {
