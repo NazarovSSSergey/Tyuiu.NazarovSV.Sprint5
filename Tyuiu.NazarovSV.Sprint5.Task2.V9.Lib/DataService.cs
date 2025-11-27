@@ -18,7 +18,15 @@ namespace Tyuiu.NazarovSV.Sprint5.Task2.V9.Lib
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    if (matrix[i, j] % 2 != 0)
+                    if (matrix[i, j] == 7)
+                    {
+                        matrix[j, i] = 0;
+                    }
+                    if (matrix[i, j] == 1)
+                    {
+                        matrix[j, i] = 0;
+                    }
+                    if (matrix[i, j] == 3)
                     {
                         matrix[j, i] = 0;
                     }
@@ -31,11 +39,11 @@ namespace Tyuiu.NazarovSV.Sprint5.Task2.V9.Lib
                 {
                     if (j != cols)
                     {
-                        str += matrix[i, j] + ";";
+                        str = str +matrix[i, j] + ";";
                     }
                     else
                     {
-                        str += matrix[i, j];
+                        str = str +matrix[i, j];
                     }
                 }
                 if (i != rows - 1)
