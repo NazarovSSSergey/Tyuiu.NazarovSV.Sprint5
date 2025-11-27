@@ -5,57 +5,44 @@ namespace Tyuiu.NazarovSV.Sprint5.Task2.V9.Lib
     {
         public string SaveToFileTextData(int[,] matrix)
         {
-            string path = $@"{Path.GetTempPath()}\OutPutFileTask2.csv";
+            string path = $@"{Path.GetTempPath()}OutPutFileTask2.csv";
             FileInfo fileInfo = new FileInfo(path);
             bool fileExists = fileInfo.Exists;
             if (fileExists)
             {
                 File.Delete(path);
             }
+
             int rows = matrix.GetUpperBound(0) + 1;
-            int cols = matrix.Length / rows;
+            int cols = matrix.GetUpperBound(1) + 1; // Исправлено: получение количества столбцов
+
+            // Заменяем нечётные числа на нули
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    if (matrix[i, j] == 7)
+                    if (matrix[i, j] % 2 != 0)
                     {
-                        matrix[j, i] = 0;
-                    }
-                    if (matrix[i, j] == 1)
-                    {
-                        matrix[j, i] = 0;
-                    }
-                    if (matrix[i, j] == 3)
-                    {
-                        matrix[j, i] = 0;
+                        matrix[i, j] = 0; // Исправлено: правильные индексы
                     }
                 }
             }
-            string str = "";
+
+            // Запись результата в файл
             for (int i = 0; i < rows; i++)
             {
+                string str = ""; // Переместили инициализацию строки сюда
                 for (int j = 0; j < cols; j++)
                 {
-                    if (j != cols)
+                    str += matrix[i, j]; // Добавляем элемент массива
+                    if (j < cols - 1) // Если это не последний элемент в строке
                     {
-                        str = str +matrix[i, j] + ";";
-                    }
-                    else
-                    {
-                        str = str +matrix[i, j];
+                        str += ";"; // Добавляем разделитель
                     }
                 }
-                if (i != rows - 1)
-                {
-                    File.AppendAllText(path, str + Environment.NewLine);
-                }
-                else
-                {
-                    File.AppendAllText(path, str);
-                }
-                str = "";
+                File.AppendAllText(path, str + Environment.NewLine); // Записываем строку в файл
             }
+
             return path;
         }
     }
