@@ -5,44 +5,49 @@ namespace Tyuiu.NazarovSV.Sprint5.Task2.V9.Lib
     {
         public string SaveToFileTextData(int[,] matrix)
         {
-            string path = $@"{Path.GetTempPath()}OutPutFileTask2.csv";
+            string path = $@"{Path.GetTempPath()}\OutPutFileTask2.csv";
             FileInfo fileInfo = new FileInfo(path);
             bool fileExists = fileInfo.Exists;
             if (fileExists)
             {
                 File.Delete(path);
             }
-
             int rows = matrix.GetUpperBound(0) + 1;
-            int cols = matrix.GetUpperBound(1) + 1; // Исправлено: получение количества столбцов
-
-            // Заменяем нечётные числа на нули
+            int cols = matrix.Length / rows;
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
                     if (matrix[i, j] % 2 != 0)
                     {
-                        matrix[i, j] = 0; // Исправлено: правильные индексы
+                        matrix[i, j] = 0;
                     }
                 }
             }
-
-            // Запись результата в файл
+            string str = "";
             for (int i = 0; i < rows; i++)
             {
-                string str = ""; // Переместили инициализацию строки сюда
                 for (int j = 0; j < cols; j++)
                 {
-                    str += matrix[i, j]; // Добавляем элемент массива
-                    if (j < cols - 1) // Если это не последний элемент в строке
+                    if (j != cols)
                     {
-                        str += ";"; // Добавляем разделитель
+                        str = str +matrix[i, j] + ";";
+                    }
+                    else
+                    {
+                        str = str +matrix[i, j];
                     }
                 }
-                File.AppendAllText(path, str + Environment.NewLine); // Записываем строку в файл
+                if (i != rows - 1)
+                {
+                    File.AppendAllText(path, str + Environment.NewLine);
+                }
+                else
+                {
+                    File.AppendAllText(path, str);
+                }
+                str = "";
             }
-
             return path;
         }
     }
