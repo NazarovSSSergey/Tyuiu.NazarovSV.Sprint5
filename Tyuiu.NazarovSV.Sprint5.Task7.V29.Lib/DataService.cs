@@ -5,33 +5,39 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
     {
         public string LoadDataAndSave(string path)
         {
-            string PSF = $@"{Path.GetTempPath()}\OutPutDataFileTask7V29.txt";
-
+            string PSF = $@"{Path.GetTempPath()}OutPutDataFileTask7V29.txt";
             FileInfo fileInfo = new FileInfo(PSF);
-            bool fileExists = fileInfo.Exists;
-            if (fileExists)
+            if (fileInfo.Exists)
             {
                 File.Delete(PSF);
             }
-            string strLine = "";
-            using (StreamReader reader = new StreamReader(PSF))
+            string inputFilePath = "/app/data/AssesmentData/C#/Sprint5Task7/InPutDataFileTask7V29.txt";
+            if (File.Exists(inputFilePath))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                using (StreamReader reader = new StreamReader(inputFilePath))
                 {
-                    for (int i = 0; i < line.Length; i++)
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        string p = Convert.ToString(Math.Abs(line[i]));
-                        if ( p.Length != 1)
+                        string strLine = "";
+                        for (int i = 0; i < line.Length; i++)
                         {
-                            strLine = strLine + p;
+                            string p = Convert.ToString(Math.Abs(line[i]));
+                            if (p.Length != 1)
+                            {
+                                strLine += p;
+                            }
                         }
-                    }
 
-                    File.AppendAllText(PSF, strLine + Environment.NewLine);
-                    strLine = "";
+                        File.AppendAllText(PSF, strLine + Environment.NewLine);
+                    }
                 }
             }
+            else
+            {
+                Console.WriteLine($"Файл {inputFilePath} не найден.");
+            }
+
             return PSF;
         }
     }
