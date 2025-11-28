@@ -6,7 +6,7 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
     {
         public string LoadDataAndSave(string path)
         {
-            string PSF = $@"{Directory.GetCurrentDirectory()}\OutPutFileTask7V29";
+            string PSF = $@"{Path.GetTempPath()}\OutPutFileTask7V29";
             FileInfo fileInfo = new FileInfo(PSF);
             bool fileExists = fileInfo.Exists;
             if (fileExists)
