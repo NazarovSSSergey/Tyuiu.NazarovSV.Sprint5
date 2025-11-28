@@ -1,58 +1,36 @@
 ﻿using tyuiu.cources.programming.interfaces.Sprint5;
+using System.IO;
 namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
 {
     public class DataService : ISprint5Task7V29
     {
         public string LoadDataAndSave(string path)
         {
-            string PSF = $@"{Path.GetTempPath()}OutPutDataFileTask7V29.txt";
+            string PSF = $@"{Directory.GetCurrentDirectory()}\OutPutFileTask7V29";
             FileInfo fileInfo = new FileInfo(PSF);
-            if (fileInfo.Exists)
+            bool fileExists = fileInfo.Exists;
+            if (fileExists)
             {
                 File.Delete(PSF);
             }
-
-            if (File.Exists(path))
+            string strLine = "";
+            using (StreamReader reader = new StreamReader(path))
             {
-                using (StreamReader reader = new StreamReader(path))
+                string line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
+                    for (int i = 0; i < line.Length; i++)
                     {
-
-                        string[] words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        string strLine = "";
-
-
-                        for (int i = 0; i < words.Length; i++)
+                        string p = Convert.ToString(Math.Abs(line[i]));
+                        if (p.Length != 1)
                         {
-                            strLine += words[i];
-
-
-                            if (words[i] == "сегодня")
-                            {
-                                strLine += " 12";
-                            }
-                            else if (words[i] == "завтра")
-                            {
-                                strLine += " 34";
-                            }
-
-                            if (i < words.Length - 1)
-                            {
-                                strLine += " ";
-                            }
+                            strLine = strLine + p;
                         }
-
-                        File.AppendAllText(PSF, strLine + Environment.NewLine);
                     }
                 }
+                File.AppendAllText(PSF, strLine + Environment.NewLine);
+                strLine = "";
             }
-            else
-            {
-                Console.WriteLine($"Файл {path} не найден.");
-            }
-
             return PSF;
         }
     }
