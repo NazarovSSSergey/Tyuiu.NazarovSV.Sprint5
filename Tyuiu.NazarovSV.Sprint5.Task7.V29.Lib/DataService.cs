@@ -11,21 +11,36 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
             {
                 File.Delete(PSF);
             }
-            string inputFilePath = "/app/data/AssesmentData/C#/Sprint5Task7/InPutDataFileTask7V29.txt";
-            if (File.Exists(inputFilePath))
+
+            if (File.Exists(path))
             {
-                using (StreamReader reader = new StreamReader(inputFilePath))
+                using (StreamReader reader = new StreamReader(path))
                 {
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
+
+                        string[] words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         string strLine = "";
-                        for (int i = 0; i < line.Length; i++)
+
+
+                        for (int i = 0; i < words.Length; i++)
                         {
-                            string p = Convert.ToString(line[i]);
-                            if (p.Length != 1)
+                            strLine += words[i];
+
+
+                            if (words[i] == "сегодня")
                             {
-                                strLine += p;
+                                strLine += " 12";
+                            }
+                            else if (words[i] == "завтра")
+                            {
+                                strLine += " 34";
+                            }
+
+                            if (i < words.Length - 1)
+                            {
+                                strLine += " ";
                             }
                         }
 
@@ -35,7 +50,7 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
             }
             else
             {
-                Console.WriteLine($"Файл {inputFilePath} не найден.");
+                Console.WriteLine($"Файл {path} не найден.");
             }
 
             return PSF;
