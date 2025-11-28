@@ -11,7 +11,7 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
             {
                 File.Delete(PSF);
             }
-            string inputFilePath = "";
+            string inputFilePath = "/app/data/AssesmentData/C#/Sprint5Task7/InPutDataFileTask7V29.txt";
             if (File.Exists(inputFilePath))
             {
                 using (StreamReader reader = new StreamReader(inputFilePath))
