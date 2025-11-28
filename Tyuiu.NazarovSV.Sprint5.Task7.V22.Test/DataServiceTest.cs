@@ -1,5 +1,5 @@
-﻿using Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib;
-namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Test
+﻿using Tyuiu.NazarovSV.Sprint5.Task7.V22.Lib;
+namespace Tyuiu.NazarovSV.Sprint5.Task7.V22.Test
 {
     [TestClass]
     public sealed class DataServiceTest
@@ -9,8 +9,8 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Test
         {
             string path = Path.GetTempFileName();
             FileInfo fileInfo = new FileInfo(path);
-            bool fileExists = fileInfo.Exists;
             bool next = true;
+            bool fileExists = fileInfo.Exists;
             Assert.AreEqual(next, fileExists);
         }
     }
