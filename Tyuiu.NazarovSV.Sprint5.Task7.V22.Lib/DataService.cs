@@ -24,6 +24,7 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V22.Lib
                         string p = Convert.ToString(line[i]);
                         p = p.Replace(',', '#');
                         p = p.Replace('.', '#');
+                        strLine += p;
                     }
                     File.AppendAllText(PSF, strLine + Environment.NewLine);
                     strLine = "";
