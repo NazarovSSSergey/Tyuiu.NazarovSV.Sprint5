@@ -11,7 +11,7 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
             {
                 File.Delete(PSF);
             }
-            string inputFilePath = "/app/data/AssesmentData/C#/Sprint5Task7/InPutDataFileTask7V29.txt";
+            string inputFilePath = "";
             if (File.Exists(inputFilePath))
             {
                 using (StreamReader reader = new StreamReader(inputFilePath))
@@ -22,10 +22,10 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
                         string strLine = "";
                         for (int i = 0; i < line.Length; i++)
                         {
-                            string p = Convert.ToString(Math.Abs(line[i]));
-                            if (p.Length != 1)
+                            char currentChar = line[i];
+                            if (!(char.IsDigit(currentChar) && currentChar >= '0' && currentChar <= '9'))
                             {
-                                strLine += p;
+                                strLine += currentChar;
                             }
                         }
 
