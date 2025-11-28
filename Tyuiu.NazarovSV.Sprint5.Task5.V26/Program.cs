@@ -5,7 +5,15 @@ namespace Tyuiu.NazarovSV.Sprint5.Task5.V26
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            DataService ds = new DataService();
+            Console.WriteLine("**************************************************************************");
+            Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                       *");
+            Console.WriteLine("**************************************************************************");
+            string path = Path.GetTempPath();
+            double res = ds.LoadFromDataFile(path);
+            Console.WriteLine(res);
+            Console.ReadKey();
+
         }
     }
 }
