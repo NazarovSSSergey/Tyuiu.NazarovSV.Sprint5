@@ -5,7 +5,9 @@ namespace Tyuiu.NazarovSV.Sprint5.Task5.V26.Lib
     {
         public double LoadFromDataFile(string path)
         {
-            double res = 0;
+            double positiveSum = 0;
+            double negativeSum = 0;
+
             using (StreamReader reader = new StreamReader(path))
             {
                 string line;
@@ -17,16 +19,24 @@ namespace Tyuiu.NazarovSV.Sprint5.Task5.V26.Lib
                     {
                         if (double.TryParse(number, out double value))
                         {
-                            res += value;
+                            if (value > 0)
+                            {
+                                positiveSum += value;
+                            }
+                            else if (value < 0)
+                            {
+                                negativeSum += value;
+                            }
                         }
                         else
                         {
-                            Console.WriteLine($"'{number}'");
+                            Console.WriteLine($"'{number}' не является корректным числом.");
                         }
                     }
                 }
             }
-            return res;
+            double difference = Math.Round(positiveSum + Math.Abs(negativeSum), 3);
+            return difference;
         }
     }
 }
