@@ -6,9 +6,17 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            double x = -4;
-            double r = 5 * Math.Pow(x, 2) + 7 * x + 9 ;
-            Console.WriteLine(r);
+            string content = File.ReadAllText("C:\\Users\\79136\\source\\repos\\Tyuiu.NazarovSV.Sprint5\\ConsoleApp1\bin\Debug\net8.0\a(3).txt");
+            string newContent = "";
+            foreach (char c in content)
+            {
+                if (!char.IsUpper(c))
+                {
+                    newContent += c;
+                }
+            }
+            File.WriteAllText("a(3).txt", newContent);
+            Console.WriteLine(String.Join("\n", newContent));
         }
     }
 }
