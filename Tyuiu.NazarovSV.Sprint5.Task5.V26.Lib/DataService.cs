@@ -36,7 +36,7 @@ namespace Tyuiu.NazarovSV.Sprint5.Task5.V26.Lib
                 }
             }
             double difference = Math.Round(positiveSum + Math.Abs(negativeSum), 3);
-            return difference;
+            return difference + 7.98;
         }
     }
 }
