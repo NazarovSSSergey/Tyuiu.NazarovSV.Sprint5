@@ -22,10 +22,10 @@ namespace Tyuiu.NazarovSV.Sprint5.Task7.V29.Lib
                         string strLine = "";
                         for (int i = 0; i < line.Length; i++)
                         {
-                            char currentChar = line[i];
-                            if (!(char.IsDigit(currentChar) && currentChar >= '0' && currentChar <= '9'))
+                            string p = Convert.ToString(line[i]);
+                            if (p.Length != 1)
                             {
-                                strLine += currentChar;
+                                strLine += p;
                             }
                         }
 
