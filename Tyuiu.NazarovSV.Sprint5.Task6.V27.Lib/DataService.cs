@@ -13,10 +13,10 @@ namespace Tyuiu.NazarovSV.Sprint5.Task6.V27.Lib
                 {
                     for (int i = 0; i < line.Length; i++)
                     {
-                        if (char.IsDigit(line[i]))
+                        string[] words = line.Split(new char[] { ' ', ',', '.', ';', ':', '!', '?', '"', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string word in words)
                         {
-                            string s = Convert.ToString(line[i]);
-                            if (s.Length == 3)
+                            if (word.Length == 3 && int.TryParse(word, out _))
                             {
                                 c++;
                             }
