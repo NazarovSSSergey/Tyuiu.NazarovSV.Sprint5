@@ -5,26 +5,36 @@ namespace Tyuiu.NazarovSV.Sprint5.Task6.V27.Lib
     {
         public int LoadFromDataFile(string path)
         {
-            int c = 0;
+            int co = 0;
+            string number = "";
             using (StreamReader sr = new StreamReader(path))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    for (int i = 0; i < line.Length; i++)
+                    foreach (char c in line)
                     {
-                        string[] words = line.Split(new char[] { ' ', ',', '.', ';', ':', '!', '?', '"', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-                        foreach (string word in words)
+                        if (char.IsDigit(c))
                         {
-                            if (word.Length == 3 && int.TryParse(word, out _))
+                            number += c;
+                        }
+                        else
+                        {
+                            if (number.Length == 3)
                             {
-                                c++;
+                                co++;
                             }
+                            number = "";
                         }
                     }
+                    if (number.Length == 3)
+                    {
+                        co++;
+                    }
+                    number = "";
                 }
             }
-            return c;
+            return co;
         }
     }
 }
